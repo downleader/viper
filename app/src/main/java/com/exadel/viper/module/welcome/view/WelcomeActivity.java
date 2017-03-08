@@ -1,5 +1,6 @@
 package com.exadel.viper.module.welcome.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.exadel.viper.MainActivity;
 import com.exadel.viper.R;
 import com.exadel.viper.common.Viper;
 import com.exadel.viper.common.module.ViperModule;
@@ -64,11 +66,21 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomePresent
     
     @Override
     public void displayProgress(boolean show) {
+        mMessageView.setVisibility(show ? View.GONE : View.VISIBLE);
         mProgressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
     
     @Override
     public void greetUser(Message message) {
         mMessageView.setText(message.getText());
+    }
+    
+    @Override
+    public void navigateToMain() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
+    
+    public void onNavigate(View view) {
+        mViperModule.getPresenter().onNavigate();
     }
 }

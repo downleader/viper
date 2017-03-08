@@ -44,6 +44,11 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     }
     
     @Override
+    public void onNavigate() {
+        mView.navigateToMain();
+    }
+    
+    @Override
     public void onRetrieve(Message message) {
         mView.displayProgress(false);
         mView.greetUser(message);

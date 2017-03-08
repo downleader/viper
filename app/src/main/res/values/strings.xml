@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Viper</string>
     <string name="title_enter">Enter</string>
+    <string name="title_navigate">Navigate</string>
 </resources>

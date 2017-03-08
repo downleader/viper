@@ -14,11 +14,15 @@ public interface WelcomePresenter extends ViperPresenter<WelcomeInteractor>, Wel
     
     void onUserArrived();
     
+    void onNavigate();
+    
     interface View {
         
         void displayProgress(boolean show);
         
         void greetUser(Message message);
+        
+        void navigateToMain();
         
     }
 }
