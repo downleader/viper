@@ -1,16 +1,16 @@
 package com.exadel.viper.module.welcome.entity;
 
 /**
- * Message.
+ * Welcome Message.
  *
  * @version 1.0 Mar 08 2017
  * @author  downleader
  */
-public class Message {
+public class WelcomeMessage {
     
     private final String mText;
     
-    public Message(String text) {
+    public WelcomeMessage(String text) {
         mText = text;
     }
     

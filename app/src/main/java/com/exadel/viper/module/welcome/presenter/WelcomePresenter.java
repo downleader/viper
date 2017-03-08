@@ -1,7 +1,7 @@
 package com.exadel.viper.module.welcome.presenter;
 
 import com.exadel.viper.common.component.ViperPresenter;
-import com.exadel.viper.module.welcome.entity.Message;
+import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
 
 /**
@@ -10,7 +10,8 @@ import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
  * @version 1.0 Mar 08 2017
  * @author  downleader
  */
-public interface WelcomePresenter extends ViperPresenter<WelcomeInteractor>, WelcomeInteractor.Presenter {
+public interface WelcomePresenter extends ViperPresenter<WelcomePresenterState, WelcomeInteractor>,
+        WelcomeInteractor.Presenter {
     
     void onUserArrived();
     
@@ -20,7 +21,7 @@ public interface WelcomePresenter extends ViperPresenter<WelcomeInteractor>, Wel
         
         void displayProgress(boolean show);
         
-        void greetUser(Message message);
+        void greetUser(WelcomeMessage message);
         
         void navigateToMain();
         

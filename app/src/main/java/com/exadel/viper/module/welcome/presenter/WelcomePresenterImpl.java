@@ -1,6 +1,9 @@
 package com.exadel.viper.module.welcome.presenter;
 
-import com.exadel.viper.module.welcome.entity.Message;
+import android.util.Log;
+
+import com.exadel.viper.common.util.ViperUtil;
+import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
 
 /**
@@ -11,9 +14,13 @@ import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
  */
 public class WelcomePresenterImpl implements WelcomePresenter {
     
+    private static final String LOGGING_TAG = WelcomePresenterImpl.class.getSimpleName();
+    
     private WelcomePresenter.View mView;
     
     private WelcomeInteractor mInteractor;
+    
+    private String mState;
     
     public WelcomePresenterImpl(WelcomePresenter.View view) {
         mView = view;
@@ -26,15 +33,30 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     
     @Override
     public void onBind() {
-        
+        if (mState == null) {
+            mState = ViperUtil.Component.PRESENTER.toString();
+            Log.d(LOGGING_TAG, "State created: " + mState);
+        } else {
+            Log.d(LOGGING_TAG, "State restored: " + mState);
+        }
     }
     
     @Override
-    public void onUnbind(boolean destroy) {
-        if (destroy) {
+    public void onUnbind(boolean shutdown) {
+        if (!shutdown) {
             mView = null;
             mInteractor = null;
         }
+    }
+    
+    @Override
+    public WelcomePresenterState onSaveState() {
+        return new WelcomePresenterState(mState);
+    }
+    
+    @Override
+    public void onRestoreState(WelcomePresenterState state) {
+        mState = state.getValue();
     }
     
     @Override
@@ -49,7 +71,7 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     }
     
     @Override
-    public void onRetrieve(Message message) {
+    public void onRetrieve(WelcomeMessage message) {
         mView.displayProgress(false);
         mView.greetUser(message);
     }

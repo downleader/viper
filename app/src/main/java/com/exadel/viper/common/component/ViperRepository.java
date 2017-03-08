@@ -1,6 +1,7 @@
 package com.exadel.viper.common.component;
 
 import com.exadel.viper.common.base.ViperComponent;
+import com.exadel.viper.common.state.ViperState;
 
 /**
  * Viper Repository.
@@ -8,7 +9,7 @@ import com.exadel.viper.common.base.ViperComponent;
  * @version 1.0 Mar 08 2017
  * @author  downleader
  */
-public interface ViperRepository<Interactor> extends ViperComponent {
+public interface ViperRepository<State extends ViperState, Interactor> extends ViperComponent<State> {
     
     void registerInteractor(Interactor interactor);
     

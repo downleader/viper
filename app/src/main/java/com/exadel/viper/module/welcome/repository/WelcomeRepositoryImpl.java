@@ -3,7 +3,8 @@ package com.exadel.viper.module.welcome.repository;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.exadel.viper.module.welcome.entity.Message;
+import com.exadel.viper.common.util.ViperUtil;
+import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 
 import java.util.Random;
 
@@ -15,31 +16,51 @@ import java.util.Random;
  */
 public class WelcomeRepositoryImpl implements WelcomeRepository {
     
+    private static final String LOGGING_TAG = WelcomeRepositoryImpl.class.getSimpleName();
+    
     private boolean mBound;
     
     private MessageTask mMessageTask;
     
-    private Message mPendingMessage;
+    private WelcomeMessage mPendingMessage;
     
     private WelcomeRepository.Interactor mInteractor;
+    
+    private String mState;
     
     @Override
     public void onBind() {
         mBound = true;
+        if (mState == null) {
+            mState = ViperUtil.Component.REPOSITORY.toString();
+            Log.d(LOGGING_TAG, "State created: " + mState);
+        } else {
+            Log.d(LOGGING_TAG, "State restored: " + mState);
+        }
     }
     
     @Override
-    public void onUnbind(boolean destroy) {
+    public void onUnbind(boolean shutdown) {
         mBound = false;
-        if (destroy) {
+        if (!shutdown) {
             if (mMessageTask != null) {
                 if (!mMessageTask.cancel(true)) {
                     clearTask();
                 } else {
-                    Log.d("VIPER", "Message task has been canceled.");
+                    Log.d(LOGGING_TAG, "Task has been canceled.");
                 }
             }
         }
+    }
+    
+    @Override
+    public WelcomeRepositoryState onSaveState() {
+        return new WelcomeRepositoryState(mState);
+    }
+    
+    @Override
+    public void onRestoreState(WelcomeRepositoryState state) {
+        mState = state.getValue();
     }
     
     @Override
@@ -63,16 +84,16 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
     }
     
     private void clearTask() {
-        Log.d("VIPER", "Message task has been cleared.");
+        Log.d(LOGGING_TAG, "Task has been cleared.");
         mMessageTask = null;
     }
     
-    private class MessageTask extends AsyncTask<Void, Void, Message> {
+    private class MessageTask extends AsyncTask<Void, Void, WelcomeMessage> {
         
         @Override
-        protected Message doInBackground(Void... params) {
+        protected WelcomeMessage doInBackground(Void... params) {
             Random random = new Random(System.currentTimeMillis());
-            int loadTimeInSeconds = random.nextInt(3) + 5;
+            int loadTimeInSeconds = random.nextInt(3) + 2;
             try {
                 Thread.sleep(loadTimeInSeconds * 1000);
             } catch (InterruptedException exception) {
@@ -81,11 +102,17 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
             if (isCancelled()) {
                 return null;
             }
-            return new Message("Hey! I'm surprised it works.");
+            String[] messages = {
+                    "Welcome!",
+                    "Hello hello hello how low?",
+                    "Hey! I'm surprised it works.",
+            };
+            String message = messages[random.nextInt(messages.length)];
+            return new WelcomeMessage(message);
         }
         
         @Override
-        protected void onPostExecute(Message message) {
+        protected void onPostExecute(WelcomeMessage message) {
             clearTask();
             if (mBound) {
                 if (mInteractor != null) {
@@ -97,7 +124,7 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
         }
         
         @Override
-        protected void onCancelled(Message message) {
+        protected void onCancelled(WelcomeMessage message) {
             clearTask();
         }
     }

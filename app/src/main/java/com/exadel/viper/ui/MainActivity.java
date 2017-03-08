@@ -1,4 +1,4 @@
-package com.exadel.viper;
+package com.exadel.viper.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.exadel.viper.R;
 import com.exadel.viper.module.welcome.view.WelcomeActivity;
 
 /**
