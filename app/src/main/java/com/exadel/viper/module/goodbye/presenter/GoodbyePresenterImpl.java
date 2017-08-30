@@ -1,6 +1,6 @@
 package com.exadel.viper.module.goodbye.presenter;
 
-import com.exadel.viper.impl.state.DefaultState;
+import com.exadel.viper.impl.base.AbstractComponent;
 import com.exadel.viper.module.goodbye.entity.GoodbyeMessage;
 import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
 
@@ -10,7 +10,7 @@ import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public class GoodbyePresenterImpl implements GoodbyePresenter {
+public class GoodbyePresenterImpl extends AbstractComponent implements GoodbyePresenter {
     
     private GoodbyePresenter.View mView;
     
@@ -26,26 +26,12 @@ public class GoodbyePresenterImpl implements GoodbyePresenter {
     }
     
     @Override
-    public void onBind() {
-        
-    }
-    
-    @Override
     public void onUnbind(boolean shutdown) {
+        super.onUnbind(shutdown);
         if (!shutdown) {
             mView = null;
             mInteractor = null;
         }
-    }
-    
-    @Override
-    public DefaultState onSaveState() {
-        return null;
-    }
-    
-    @Override
-    public void onRestoreState(DefaultState state) {
-        
     }
     
     @Override

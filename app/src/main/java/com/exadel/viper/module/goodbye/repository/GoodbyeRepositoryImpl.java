@@ -3,7 +3,7 @@ package com.exadel.viper.module.goodbye.repository;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.exadel.viper.impl.state.DefaultState;
+import com.exadel.viper.impl.base.AbstractComponent;
 import com.exadel.viper.module.goodbye.entity.GoodbyeMessage;
 
 import java.util.Random;
@@ -14,11 +14,9 @@ import java.util.Random;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public class GoodbyeRepositoryImpl implements GoodbyeRepository {
+public class GoodbyeRepositoryImpl extends AbstractComponent implements GoodbyeRepository {
     
     private static final String LOGGING_TAG = GoodbyeRepositoryImpl.class.getSimpleName();
-    
-    private boolean mBound;
     
     private MessageTask mMessageTask;
     
@@ -27,13 +25,8 @@ public class GoodbyeRepositoryImpl implements GoodbyeRepository {
     private GoodbyeRepository.Interactor mInteractor;
     
     @Override
-    public void onBind() {
-        mBound = true;
-    }
-    
-    @Override
     public void onUnbind(boolean shutdown) {
-        mBound = false;
+        super.onUnbind(shutdown);
         if (shutdown) {
             if (mMessageTask != null) {
                 if (!mMessageTask.cancel(true)) {
@@ -43,16 +36,6 @@ public class GoodbyeRepositoryImpl implements GoodbyeRepository {
                 }
             }
         }
-    }
-    
-    @Override
-    public DefaultState onSaveState() {
-        return null;
-    }
-    
-    @Override
-    public void onRestoreState(DefaultState state) {
-        
     }
     
     @Override
@@ -106,7 +89,7 @@ public class GoodbyeRepositoryImpl implements GoodbyeRepository {
         @Override
         protected void onPostExecute(GoodbyeMessage message) {
             clearTask();
-            if (mBound) {
+            if (isBound()) {
                 if (mInteractor != null) {
                     mInteractor.onLoad(message);
                 }
