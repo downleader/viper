@@ -1,6 +1,6 @@
 package com.exadel.viper.module.welcome.presenter;
 
-import com.exadel.viper.common.component.ViperPresenter;
+import com.exadel.viper.core.component.ViperPresenter;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
 

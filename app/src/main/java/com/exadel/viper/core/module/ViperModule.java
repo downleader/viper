@@ -1,15 +1,15 @@
-package com.exadel.viper.common.module;
+package com.exadel.viper.core.module;
 
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import com.exadel.viper.common.component.ViperInteractor;
-import com.exadel.viper.common.component.ViperPresenter;
-import com.exadel.viper.common.component.ViperRepository;
-import com.exadel.viper.common.component.ViperView;
-import com.exadel.viper.common.state.ViperState;
-import com.exadel.viper.common.state.ViperTransformer;
-import com.exadel.viper.common.util.ViperUtil;
+import com.exadel.viper.core.component.ViperInteractor;
+import com.exadel.viper.core.component.ViperPresenter;
+import com.exadel.viper.core.component.ViperRepository;
+import com.exadel.viper.core.component.ViperView;
+import com.exadel.viper.core.state.ViperState;
+import com.exadel.viper.core.state.transformer.ViperTransformer;
+import com.exadel.viper.core.utils.ViperUtils;
 
 /**
  * Viper Module.
@@ -23,26 +23,28 @@ public class ViperModule<RepositoryState extends ViperState,
         PresenterState extends ViperState, Presenter extends ViperPresenter<PresenterState, Interactor>,
         ViewState extends ViperState, View extends ViperView<ViewState>> {
     
-    private String mKey;
+    protected String mKey;
+
+    protected Repository mRepository;
+
+    protected Interactor mInteractor;
+
+    protected Presenter mPresenter;
+
+    protected View mView;
+
+    protected ViperTransformer<RepositoryState, Parcelable> mRepositoryTransformer;
+
+    protected ViperTransformer<InteractorState, Parcelable> mInteractorTransformer;
+
+    protected ViperTransformer<PresenterState, Parcelable> mPresenterTransformer;
+
+    protected ViperTransformer<ViewState, Parcelable> mViewTransformer;
     
-    private Repository mRepository;
-    
-    private Interactor mInteractor;
-    
-    private Presenter mPresenter;
-    
-    private View mView;
-    
-    private ViperTransformer<RepositoryState, Parcelable> mRepositoryTransformer;
-    
-    private ViperTransformer<InteractorState, Parcelable> mInteractorTransformer;
-    
-    private ViperTransformer<PresenterState, Parcelable> mPresenterTransformer;
-    
-    private ViperTransformer<ViewState, Parcelable> mViewTransformer;
-    
-    public ViperModule(String key, Repository repository,
-                       Interactor interactor, Presenter presenter,
+    public ViperModule(String key,
+                       Repository repository,
+                       Interactor interactor,
+                       Presenter presenter,
                        View view) {
         mKey = key;
         mRepository = repository;
@@ -105,22 +107,22 @@ public class ViperModule<RepositoryState extends ViperState,
     public void saveState(Bundle bundle) {
         if (mRepositoryTransformer != null) {
             bundle.putParcelable(
-                    ViperUtil.createKey(mKey, ViperUtil.Component.REPOSITORY),
+                    ViperUtils.createKey(mKey, ViperUtils.Component.REPOSITORY),
                     mRepositoryTransformer.exportState(mRepository.onSaveState()));
         }
         if (mInteractorTransformer != null) {
             bundle.putParcelable(
-                    ViperUtil.createKey(mKey, ViperUtil.Component.INTERACTOR),
+                    ViperUtils.createKey(mKey, ViperUtils.Component.INTERACTOR),
                     mInteractorTransformer.exportState(mInteractor.onSaveState()));
         }
         if (mPresenterTransformer != null) {
             bundle.putParcelable(
-                    ViperUtil.createKey(mKey, ViperUtil.Component.PRESENTER),
+                    ViperUtils.createKey(mKey, ViperUtils.Component.PRESENTER),
                     mPresenterTransformer.exportState(mPresenter.onSaveState()));
         }
         if (mViewTransformer != null) {
             bundle.putParcelable(
-                    ViperUtil.createKey(mKey, ViperUtil.Component.VIEW),
+                    ViperUtils.createKey(mKey, ViperUtils.Component.VIEW),
                     mViewTransformer.exportState(mView.onSaveState()));
         }
     }
@@ -129,19 +131,19 @@ public class ViperModule<RepositoryState extends ViperState,
         if (bundle != null) {
             if (mRepositoryTransformer != null) {
                 mRepository.onRestoreState(mRepositoryTransformer.importState(bundle.getParcelable(
-                        ViperUtil.createKey(mKey, ViperUtil.Component.REPOSITORY))));
+                        ViperUtils.createKey(mKey, ViperUtils.Component.REPOSITORY))));
             }
             if (mInteractorTransformer != null) {
                 mInteractor.onRestoreState(mInteractorTransformer.importState(bundle.getParcelable(
-                        ViperUtil.createKey(mKey, ViperUtil.Component.INTERACTOR))));
+                        ViperUtils.createKey(mKey, ViperUtils.Component.INTERACTOR))));
             }
             if (mPresenterTransformer != null) {
                 mPresenter.onRestoreState(mPresenterTransformer.importState(bundle.getParcelable(
-                        ViperUtil.createKey(mKey, ViperUtil.Component.PRESENTER))));
+                        ViperUtils.createKey(mKey, ViperUtils.Component.PRESENTER))));
             }
             if (mViewTransformer != null) {
                 mView.onRestoreState(mViewTransformer.importState(bundle.getParcelable(
-                        ViperUtil.createKey(mKey, ViperUtil.Component.VIEW))));
+                        ViperUtils.createKey(mKey, ViperUtils.Component.VIEW))));
             }
         }
     }

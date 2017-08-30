@@ -1,6 +1,6 @@
 package com.exadel.viper.module.welcome.view;
 
-import com.exadel.viper.common.state.ViperState;
+import com.exadel.viper.core.state.ViperState;
 
 /**
  * Welcome View State.

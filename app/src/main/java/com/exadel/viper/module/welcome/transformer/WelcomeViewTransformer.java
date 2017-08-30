@@ -3,7 +3,7 @@ package com.exadel.viper.module.welcome.transformer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.exadel.viper.common.state.ViperTransformer;
+import com.exadel.viper.core.state.transformer.ViperTransformer;
 import com.exadel.viper.module.welcome.view.WelcomeViewState;
 
 /**

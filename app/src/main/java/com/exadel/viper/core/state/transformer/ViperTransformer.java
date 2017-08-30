@@ -1,4 +1,6 @@
-package com.exadel.viper.common.state;
+package com.exadel.viper.core.state.transformer;
+
+import com.exadel.viper.core.state.ViperState;
 
 /**
  * Viper Transformer.

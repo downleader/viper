@@ -1,6 +1,6 @@
-package com.exadel.viper.common.base;
+package com.exadel.viper.core.base;
 
-import com.exadel.viper.common.state.ViperState;
+import com.exadel.viper.core.state.ViperState;
 
 /**
  * Viper Component.

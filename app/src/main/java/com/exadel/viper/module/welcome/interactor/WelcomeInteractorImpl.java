@@ -2,7 +2,7 @@ package com.exadel.viper.module.welcome.interactor;
 
 import android.util.Log;
 
-import com.exadel.viper.common.util.ViperUtil;
+import com.exadel.viper.core.utils.ViperUtils;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 import com.exadel.viper.module.welcome.repository.WelcomeRepository;
 
@@ -31,7 +31,7 @@ public class WelcomeInteractorImpl implements WelcomeInteractor {
     public void onBind() {
         mRepository.registerInteractor(this);
         if (mState == null) {
-            mState = ViperUtil.Component.INTERACTOR.toString();
+            mState = ViperUtils.Component.INTERACTOR.toString();
             Log.d(LOGGING_TAG, "State created: " + mState);
         } else {
             Log.d(LOGGING_TAG, "State restored: " + mState);

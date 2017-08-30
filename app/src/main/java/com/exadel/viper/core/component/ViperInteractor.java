@@ -1,7 +1,7 @@
-package com.exadel.viper.common.component;
+package com.exadel.viper.core.component;
 
-import com.exadel.viper.common.base.ViperComponent;
-import com.exadel.viper.common.state.ViperState;
+import com.exadel.viper.core.base.ViperComponent;
+import com.exadel.viper.core.state.ViperState;
 
 /**
  * Viper Interactor.

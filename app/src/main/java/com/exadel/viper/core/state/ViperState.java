@@ -1,4 +1,4 @@
-package com.exadel.viper.common.state;
+package com.exadel.viper.core.state;
 
 /**
  * Viper State.

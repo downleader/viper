@@ -2,7 +2,7 @@ package com.exadel.viper.module.welcome.presenter;
 
 import android.util.Log;
 
-import com.exadel.viper.common.util.ViperUtil;
+import com.exadel.viper.core.utils.ViperUtils;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
 
@@ -34,7 +34,7 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     @Override
     public void onBind() {
         if (mState == null) {
-            mState = ViperUtil.Component.PRESENTER.toString();
+            mState = ViperUtils.Component.PRESENTER.toString();
             Log.d(LOGGING_TAG, "State created: " + mState);
         } else {
             Log.d(LOGGING_TAG, "State restored: " + mState);

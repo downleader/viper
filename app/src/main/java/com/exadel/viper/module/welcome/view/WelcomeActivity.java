@@ -10,8 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.exadel.viper.R;
-import com.exadel.viper.common.component.ViperView;
-import com.exadel.viper.common.util.ViperUtil;
+import com.exadel.viper.core.component.ViperView;
+import com.exadel.viper.core.utils.ViperUtils;
 import com.exadel.viper.module.welcome.WelcomeModule;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
@@ -77,7 +77,7 @@ public class WelcomeActivity extends AppCompatActivity implements
     @Override
     public void onBind() {
         if (mState == null) {
-            mState = ViperUtil.Component.VIEW.toString();
+            mState = ViperUtils.Component.VIEW.toString();
             Log.d(LOGGING_TAG, "State created: " + mState);
         } else {
             Log.d(LOGGING_TAG, "State restored: " + mState);

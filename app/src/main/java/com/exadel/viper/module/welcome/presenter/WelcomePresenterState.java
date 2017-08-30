@@ -1,6 +1,6 @@
 package com.exadel.viper.module.welcome.presenter;
 
-import com.exadel.viper.common.state.ViperState;
+import com.exadel.viper.core.state.ViperState;
 
 /**
  * Welcome Presenter State.

@@ -3,7 +3,7 @@ package com.exadel.viper.module.welcome.repository;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.exadel.viper.common.util.ViperUtil;
+import com.exadel.viper.core.utils.ViperUtils;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 
 import java.util.Random;
@@ -32,7 +32,7 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
     public void onBind() {
         mBound = true;
         if (mState == null) {
-            mState = ViperUtil.Component.REPOSITORY.toString();
+            mState = ViperUtils.Component.REPOSITORY.toString();
             Log.d(LOGGING_TAG, "State created: " + mState);
         } else {
             Log.d(LOGGING_TAG, "State restored: " + mState);

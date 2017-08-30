@@ -1,6 +1,6 @@
 package com.exadel.viper.module.welcome.repository;
 
-import com.exadel.viper.common.component.ViperRepository;
+import com.exadel.viper.core.component.ViperRepository;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
 
 /**
