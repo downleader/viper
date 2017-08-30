@@ -9,6 +9,6 @@ import com.exadel.viper.impl.state.DefaultState;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public abstract class DefaultInteractor implements ViperInteractor<DefaultState> {
+public interface DefaultInteractor extends ViperInteractor<DefaultState> {
     
 }

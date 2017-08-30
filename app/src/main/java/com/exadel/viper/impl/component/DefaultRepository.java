@@ -9,7 +9,6 @@ import com.exadel.viper.impl.state.DefaultState;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public abstract class DefaultRepository<Interactor>
-        implements ViperRepository<DefaultState, Interactor> {
+public interface DefaultRepository<Interactor> extends ViperRepository<DefaultState, Interactor> {
     
 }

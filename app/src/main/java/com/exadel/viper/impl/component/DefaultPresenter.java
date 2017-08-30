@@ -9,7 +9,7 @@ import com.exadel.viper.impl.state.DefaultState;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public abstract class DefaultPresenter<Interactor extends DefaultInteractor>
-        implements ViperPresenter<DefaultState, Interactor> {
+public interface DefaultPresenter<Interactor extends DefaultInteractor>
+        extends ViperPresenter<DefaultState, Interactor> {
     
 }
