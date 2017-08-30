@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.exadel.viper.R;
+import com.exadel.viper.module.goodbye.view.GoodbyeActivity;
 import com.exadel.viper.module.welcome.view.WelcomeActivity;
 
 /**
@@ -25,5 +26,9 @@ public class MainActivity extends AppCompatActivity {
     
     public void onEnter(View view) {
         startActivity(new Intent(this, WelcomeActivity.class));
+    }
+    
+    public void onExit(View view) {
+        startActivity(new Intent(this, GoodbyeActivity.class));
     }
 }
