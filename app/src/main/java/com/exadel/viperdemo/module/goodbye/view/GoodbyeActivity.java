@@ -2,6 +2,8 @@ package com.exadel.viperdemo.module.goodbye.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -24,6 +26,8 @@ import com.exadel.viperdemo.module.goodbye.repository.GoodbyeRepositoryImpl;
  * @author  downleader
  */
 public class GoodbyeActivity extends AppCompatActivity implements GoodbyePresenter.View {
+    
+    private static final String REPOSITORY_TAG = "com.exadel.viperdemo.repository.goodbye";
     
     private GoodbyeModule mViperModule;
     
@@ -98,10 +102,50 @@ public class GoodbyeActivity extends AppCompatActivity implements GoodbyePresent
     }
     
     private void setupViper() {
-        GoodbyeRepository repository = new GoodbyeRepositoryImpl();
+        GoodbyeRepository repository = fetchGoodbyeRepository();
         GoodbyePresenter presenter = new GoodbyePresenterImpl(repository, this);
         
         mViperModule = new GoodbyeModule(repository, presenter, this);
         mViperModule.bind();
+    }
+    
+    private GoodbyeRepository fetchGoodbyeRepository() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        GoodbyeRepositoryFragment fragment = (GoodbyeRepositoryFragment)
+                fragmentManager.findFragmentByTag(REPOSITORY_TAG);
+        if (fragment == null) {
+            GoodbyeRepository repository = new GoodbyeRepositoryImpl();
+            fragment = GoodbyeRepositoryFragment.newInstance(repository);
+            fragmentManager
+                    .beginTransaction()
+                    .add(fragment, REPOSITORY_TAG)
+                    .commit();
+        }
+        return fragment.getGoodbyeRepository();
+    }
+    
+    public static class GoodbyeRepositoryFragment extends Fragment {
+        
+        private GoodbyeRepository mGoodbyeRepository;
+        
+        public static GoodbyeRepositoryFragment newInstance(GoodbyeRepository goodbyeRepository) {
+            GoodbyeRepositoryFragment fragment = new GoodbyeRepositoryFragment();
+            fragment.setGoodbyeRepository(goodbyeRepository);
+            return fragment;
+        }
+        
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setRetainInstance(true);
+        }
+        
+        public GoodbyeRepository getGoodbyeRepository() {
+            return mGoodbyeRepository;
+        }
+        
+        public void setGoodbyeRepository(GoodbyeRepository goodbyeRepository) {
+            mGoodbyeRepository = goodbyeRepository;
+        }
     }
 }

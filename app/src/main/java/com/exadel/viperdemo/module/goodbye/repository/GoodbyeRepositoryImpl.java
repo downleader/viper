@@ -55,8 +55,13 @@ public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRe
     
     @Override
     public void loadMessage() {
-        mMessageTask = new MessageTask();
-        mMessageTask.execute();
+        if (mMessageTask == null) {
+            mMessageTask = new MessageTask();
+            mMessageTask.execute();
+            Log.d(LOGGING_TAG, "Task has been launched.");
+        } else {
+            Log.d(LOGGING_TAG, "Task is pending.");
+        }
     }
     
     private void clearTask() {
