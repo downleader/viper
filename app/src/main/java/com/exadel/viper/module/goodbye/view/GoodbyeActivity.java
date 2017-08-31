@@ -9,7 +9,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.exadel.viper.R;
-import com.exadel.viper.impl.component.DefaultView;
 import com.exadel.viper.impl.state.DefaultState;
 import com.exadel.viper.module.goodbye.GoodbyeModule;
 import com.exadel.viper.module.goodbye.entity.GoodbyeMessage;
@@ -27,7 +26,7 @@ import com.exadel.viper.ui.MainActivity;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public class GoodbyeActivity extends AppCompatActivity implements DefaultView, GoodbyePresenter.View {
+public class GoodbyeActivity extends AppCompatActivity implements GoodbyePresenter.View {
     
     private GoodbyeModule mViperModule;
     

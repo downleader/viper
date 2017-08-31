@@ -17,12 +17,12 @@ import java.util.Random;
 public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRepository {
     
     private static final String LOGGING_TAG = GoodbyeRepositoryImpl.class.getSimpleName();
+
+    private GoodbyeRepository.Interactor mInteractor;
     
     private MessageTask mMessageTask;
     
     private GoodbyeMessage mPendingMessage;
-    
-    private GoodbyeRepository.Interactor mInteractor;
     
     @Override
     public void onUnbind(boolean shutdown) {

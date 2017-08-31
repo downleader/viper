@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.exadel.viper.R;
-import com.exadel.viper.core.component.ViperView;
 import com.exadel.viper.core.utils.ViperUtils;
 import com.exadel.viper.module.welcome.WelcomeModule;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
@@ -32,8 +31,7 @@ import com.exadel.viper.ui.MainActivity;
  * @version 1.0 Mar 08 2017
  * @author  downleader
  */
-public class WelcomeActivity extends AppCompatActivity implements
-        ViperView<WelcomeViewState>, WelcomePresenter.View {
+public class WelcomeActivity extends AppCompatActivity implements WelcomePresenter.View {
     
     private static final String LOGGING_TAG = WelcomeActivity.class.getSimpleName();
     

@@ -19,12 +19,12 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
     private static final String LOGGING_TAG = WelcomeRepositoryImpl.class.getSimpleName();
     
     private boolean mBound;
+
+    private WelcomeRepository.Interactor mInteractor;
     
     private MessageTask mMessageTask;
     
     private WelcomeMessage mPendingMessage;
-    
-    private WelcomeRepository.Interactor mInteractor;
     
     private String mState;
     

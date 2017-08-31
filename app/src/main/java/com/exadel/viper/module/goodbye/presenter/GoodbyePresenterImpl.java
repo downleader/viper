@@ -12,9 +12,9 @@ import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
  */
 public class GoodbyePresenterImpl extends DefaultComponent implements GoodbyePresenter {
     
-    private GoodbyePresenter.View mView;
-    
     private GoodbyeInteractor mInteractor;
+    
+    private GoodbyePresenter.View mView;
     
     public GoodbyePresenterImpl(GoodbyePresenter.View view) {
         mView = view;

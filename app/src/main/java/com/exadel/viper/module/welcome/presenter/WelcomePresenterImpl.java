@@ -16,9 +16,9 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     
     private static final String LOGGING_TAG = WelcomePresenterImpl.class.getSimpleName();
     
-    private WelcomePresenter.View mView;
-    
     private WelcomeInteractor mInteractor;
+    
+    private WelcomePresenter.View mView;
     
     private String mState;
     

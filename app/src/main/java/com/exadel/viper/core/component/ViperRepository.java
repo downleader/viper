@@ -9,7 +9,9 @@ import com.exadel.viper.core.state.ViperState;
  * @version 1.0 Mar 08 2017
  * @author  downleader
  */
-public interface ViperRepository<State extends ViperState, Interactor> extends ViperComponent<State> {
+public interface ViperRepository<State extends ViperState,
+        Interactor extends ViperInteractor<? extends ViperState>>
+        extends ViperComponent<State> {
     
     void registerInteractor(Interactor interactor);
     

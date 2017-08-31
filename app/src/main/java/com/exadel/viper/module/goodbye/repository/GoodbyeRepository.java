@@ -1,5 +1,6 @@
 package com.exadel.viper.module.goodbye.repository;
 
+import com.exadel.viper.impl.component.DefaultInteractor;
 import com.exadel.viper.impl.component.DefaultRepository;
 import com.exadel.viper.module.goodbye.entity.GoodbyeMessage;
 
@@ -13,7 +14,7 @@ public interface GoodbyeRepository extends DefaultRepository<GoodbyeRepository.I
     
     void loadMessage();
     
-    interface Interactor {
+    interface Interactor extends DefaultInteractor {
         
         void onLoad(GoodbyeMessage message);
         
