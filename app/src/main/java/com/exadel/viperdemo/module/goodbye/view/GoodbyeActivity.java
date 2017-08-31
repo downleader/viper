@@ -1,6 +1,5 @@
 package com.exadel.viperdemo.module.goodbye.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +16,6 @@ import com.exadel.viperdemo.module.goodbye.presenter.GoodbyePresenter;
 import com.exadel.viperdemo.module.goodbye.presenter.GoodbyePresenterImpl;
 import com.exadel.viperdemo.module.goodbye.repository.GoodbyeRepository;
 import com.exadel.viperdemo.module.goodbye.repository.GoodbyeRepositoryImpl;
-import com.exadel.viperdemo.ui.MainActivity;
 
 /**
  * Goodbye Activity.
@@ -87,7 +85,7 @@ public class GoodbyeActivity extends AppCompatActivity implements GoodbyePresent
     
     @Override
     public void navigateToMain() {
-        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
     
     public void onNavigate(View view) {

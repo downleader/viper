@@ -18,7 +18,7 @@ import java.util.Random;
 public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRepository {
     
     private static final String LOGGING_TAG = GoodbyeRepositoryImpl.class.getSimpleName();
-
+    
     private GoodbyeRepository.Presenter mPresenter;
     
     private MessageTask mMessageTask;

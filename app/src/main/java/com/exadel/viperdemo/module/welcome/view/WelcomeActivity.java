@@ -1,6 +1,5 @@
 package com.exadel.viperdemo.module.welcome.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +20,6 @@ import com.exadel.viperdemo.module.welcome.repository.WelcomeRepositoryImpl;
 import com.exadel.viperdemo.module.welcome.transformer.WelcomePresenterTransformer;
 import com.exadel.viperdemo.module.welcome.transformer.WelcomeRepositoryTransformer;
 import com.exadel.viperdemo.module.welcome.transformer.WelcomeViewTransformer;
-import com.exadel.viperdemo.ui.MainActivity;
 
 /**
  * Welcome Activity.
@@ -108,7 +106,7 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomePresent
     
     @Override
     public void navigateToMain() {
-        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
     
     public void onNavigate(View view) {
