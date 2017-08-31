@@ -15,11 +15,10 @@ import com.exadel.viper.module.goodbye.view.GoodbyeActivity;
 public class GoodbyeModule extends DefaultModule<GoodbyeRepository,
         GoodbyeInteractor, GoodbyePresenter, GoodbyeActivity> {
     
-    public GoodbyeModule(String key,
-                         GoodbyeRepository repository,
+    public GoodbyeModule(GoodbyeRepository repository,
                          GoodbyeInteractor interactor,
                          GoodbyePresenter presenter,
                          GoodbyeActivity view) {
-        super(key, repository, interactor, presenter, view);
+        super(repository, interactor, presenter, view);
     }
 }

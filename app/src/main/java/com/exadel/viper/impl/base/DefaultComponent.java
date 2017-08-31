@@ -1,6 +1,5 @@
 package com.exadel.viper.impl.base;
 
-import com.exadel.viper.core.base.ViperComponent;
 import com.exadel.viper.impl.state.DefaultState;
 
 /**
@@ -9,7 +8,7 @@ import com.exadel.viper.impl.state.DefaultState;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public abstract class DefaultComponent implements ViperComponent<DefaultState> {
+public abstract class DefaultComponent extends AbstractComponent<DefaultState> {
     
     @Override
     public DefaultState onSaveState() {

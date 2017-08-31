@@ -29,8 +29,6 @@ import com.exadel.viper.ui.MainActivity;
  */
 public class GoodbyeActivity extends AppCompatActivity implements DefaultView, GoodbyePresenter.View {
     
-    private static final String PERSISTENCE_KEY = "com.exadel.viper.module.goodbye";
-    
     private GoodbyeModule mViperModule;
     
     private ProgressBar mProgressBar;
@@ -109,7 +107,7 @@ public class GoodbyeActivity extends AppCompatActivity implements DefaultView, G
         GoodbyeInteractor interactor = new GoodbyeInteractorImpl(repository, presenter);
         presenter.setInteractor(interactor);
         
-        mViperModule = new GoodbyeModule(PERSISTENCE_KEY, repository, interactor, presenter, this);
+        mViperModule = new GoodbyeModule(repository, interactor, presenter, this);
         mViperModule.bind();
     }
 }

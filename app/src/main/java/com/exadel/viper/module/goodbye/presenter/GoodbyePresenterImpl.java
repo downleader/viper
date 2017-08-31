@@ -1,6 +1,6 @@
 package com.exadel.viper.module.goodbye.presenter;
 
-import com.exadel.viper.impl.base.AbstractComponent;
+import com.exadel.viper.impl.base.DefaultComponent;
 import com.exadel.viper.module.goodbye.entity.GoodbyeMessage;
 import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
 
@@ -10,7 +10,7 @@ import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public class GoodbyePresenterImpl extends AbstractComponent implements GoodbyePresenter {
+public class GoodbyePresenterImpl extends DefaultComponent implements GoodbyePresenter {
     
     private GoodbyePresenter.View mView;
     

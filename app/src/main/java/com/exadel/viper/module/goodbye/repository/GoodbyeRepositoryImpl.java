@@ -3,7 +3,7 @@ package com.exadel.viper.module.goodbye.repository;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.exadel.viper.impl.base.AbstractComponent;
+import com.exadel.viper.impl.base.DefaultComponent;
 import com.exadel.viper.module.goodbye.entity.GoodbyeMessage;
 
 import java.util.Random;
@@ -14,7 +14,7 @@ import java.util.Random;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public class GoodbyeRepositoryImpl extends AbstractComponent implements GoodbyeRepository {
+public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRepository {
     
     private static final String LOGGING_TAG = GoodbyeRepositoryImpl.class.getSimpleName();
     

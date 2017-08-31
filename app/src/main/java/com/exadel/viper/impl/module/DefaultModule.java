@@ -25,11 +25,10 @@ public class DefaultModule
             DefaultState, Presenter,
             DefaultState, View> {
     
-    public DefaultModule(String key,
-                         Repository repository,
+    public DefaultModule(Repository repository,
                          Interactor interactor,
                          Presenter presenter,
                          View view) {
-        super(key, repository, interactor, presenter, view);
+        super(null, repository, interactor, presenter, view);
     }
 }
