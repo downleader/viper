@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.exadel.viper.core.utils.ViperUtils;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
-import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
+import com.exadel.viper.module.welcome.repository.WelcomeRepository;
 
 /**
  * Welcome Presenter Impl.
@@ -16,23 +16,20 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     
     private static final String LOGGING_TAG = WelcomePresenterImpl.class.getSimpleName();
     
-    private WelcomeInteractor mInteractor;
+    private WelcomeRepository mRepository;
     
     private WelcomePresenter.View mView;
     
     private String mState;
     
-    public WelcomePresenterImpl(WelcomePresenter.View view) {
+    public WelcomePresenterImpl(WelcomeRepository repository, WelcomePresenter.View view) {
+        mRepository = repository;
         mView = view;
     }
     
     @Override
-    public void setInteractor(WelcomeInteractor interactor) {
-        mInteractor = interactor;
-    }
-    
-    @Override
     public void onBind() {
+        mRepository.registerPresenter(this);
         if (mState == null) {
             mState = ViperUtils.Component.PRESENTER.toString();
             Log.d(LOGGING_TAG, "State created: " + mState);
@@ -43,9 +40,10 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     
     @Override
     public void onUnbind(boolean shutdown) {
+        mRepository.unregisterPresenter(this);
         if (!shutdown) {
+            mRepository = null;
             mView = null;
-            mInteractor = null;
         }
     }
     
@@ -62,7 +60,7 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     @Override
     public void onUserArrived() {
         mView.displayProgress(true);
-        mInteractor.retrieveMessage();
+        mRepository.loadMessage();
     }
     
     @Override
@@ -71,7 +69,7 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     }
     
     @Override
-    public void onRetrieve(WelcomeMessage message) {
+    public void onLoad(WelcomeMessage message) {
         mView.displayProgress(false);
         mView.greetUser(message);
     }

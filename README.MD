@@ -1,2 +1,2 @@
-# viper
-VIPER Implementation for Android
+# VIPER
+VIPER Implementation for Android... which is actually VPER

@@ -2,7 +2,7 @@ package com.exadel.viper.module.welcome.presenter;
 
 import com.exadel.viper.core.component.ViperView;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
-import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
+import com.exadel.viper.module.welcome.repository.WelcomeRepository;
 import com.exadel.viper.module.welcome.view.WelcomeViewState;
 
 /**
@@ -11,7 +11,7 @@ import com.exadel.viper.module.welcome.view.WelcomeViewState;
  * @version 1.0 Mar 08 2017
  * @author  downleader
  */
-public interface WelcomePresenter extends WelcomeInteractor.Presenter {
+public interface WelcomePresenter extends WelcomeRepository.Presenter {
     
     void onUserArrived();
     

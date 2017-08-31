@@ -1,7 +1,6 @@
 package com.exadel.viper.module.goodbye;
 
 import com.exadel.viper.impl.module.DefaultModule;
-import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
 import com.exadel.viper.module.goodbye.presenter.GoodbyePresenter;
 import com.exadel.viper.module.goodbye.repository.GoodbyeRepository;
 import com.exadel.viper.module.goodbye.view.GoodbyeActivity;
@@ -13,12 +12,11 @@ import com.exadel.viper.module.goodbye.view.GoodbyeActivity;
  * @author  downleader
  */
 public class GoodbyeModule extends DefaultModule<GoodbyeRepository,
-        GoodbyeInteractor, GoodbyePresenter, GoodbyeActivity> {
+        GoodbyePresenter, GoodbyeActivity> {
     
     public GoodbyeModule(GoodbyeRepository repository,
-                         GoodbyeInteractor interactor,
                          GoodbyePresenter presenter,
                          GoodbyeActivity view) {
-        super(repository, interactor, presenter, view);
+        super(repository, presenter, view);
     }
 }

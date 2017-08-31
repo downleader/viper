@@ -3,7 +3,6 @@ package com.exadel.viper.core.module;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import com.exadel.viper.core.component.ViperInteractor;
 import com.exadel.viper.core.component.ViperPresenter;
 import com.exadel.viper.core.component.ViperRepository;
 import com.exadel.viper.core.component.ViperView;
@@ -19,15 +18,12 @@ import com.exadel.viper.core.utils.ViperUtils;
  */
 public class ViperModule<RepositoryState extends ViperState,
         Repository extends ViperRepository<RepositoryState, ?>,
-        InteractorState extends ViperState, Interactor extends ViperInteractor<InteractorState>,
-        PresenterState extends ViperState, Presenter extends ViperPresenter<PresenterState, Interactor>,
+        PresenterState extends ViperState, Presenter extends ViperPresenter<PresenterState>,
         ViewState extends ViperState, View extends ViperView<ViewState>> {
     
     protected String mKey;
 
     protected Repository mRepository;
-
-    protected Interactor mInteractor;
 
     protected Presenter mPresenter;
 
@@ -35,30 +31,22 @@ public class ViperModule<RepositoryState extends ViperState,
 
     protected ViperTransformer<RepositoryState, Parcelable> mRepositoryTransformer;
 
-    protected ViperTransformer<InteractorState, Parcelable> mInteractorTransformer;
-
     protected ViperTransformer<PresenterState, Parcelable> mPresenterTransformer;
 
     protected ViperTransformer<ViewState, Parcelable> mViewTransformer;
     
     public ViperModule(String key,
                        Repository repository,
-                       Interactor interactor,
                        Presenter presenter,
                        View view) {
         mKey = key;
         mRepository = repository;
-        mInteractor = interactor;
         mPresenter = presenter;
         mView = view;
     }
     
     public Repository getRepository() {
         return mRepository;
-    }
-    
-    public Interactor getInteractor() {
-        return mInteractor;
     }
     
     public Presenter getPresenter() {
@@ -73,10 +61,6 @@ public class ViperModule<RepositoryState extends ViperState,
         mRepositoryTransformer = repositoryTransformer;
     }
     
-    public void registerInteractorTransformer(ViperTransformer<InteractorState, Parcelable> interactorTransformer) {
-        mInteractorTransformer = interactorTransformer;
-    }
-    
     public void registerPresenterTransformer(ViperTransformer<PresenterState, Parcelable> presenterTransformer) {
         mPresenterTransformer = presenterTransformer;
     }
@@ -87,19 +71,16 @@ public class ViperModule<RepositoryState extends ViperState,
     
     public void bind() {
         mRepository.onBind();
-        mInteractor.onBind();
         mPresenter.onBind();
         mView.onBind();
     }
     
     public void unbind(boolean destroy) {
         mRepository.onUnbind(destroy);
-        mInteractor.onUnbind(true);
         mPresenter.onUnbind(true);
         mView.onUnbind(true);
         
         mRepository = null;
-        mInteractor = null;
         mPresenter = null;
         mView = null;
     }
@@ -109,11 +90,6 @@ public class ViperModule<RepositoryState extends ViperState,
             bundle.putParcelable(
                     ViperUtils.createKey(mKey, ViperUtils.Component.REPOSITORY),
                     mRepositoryTransformer.exportState(mRepository.onSaveState()));
-        }
-        if (mInteractorTransformer != null) {
-            bundle.putParcelable(
-                    ViperUtils.createKey(mKey, ViperUtils.Component.INTERACTOR),
-                    mInteractorTransformer.exportState(mInteractor.onSaveState()));
         }
         if (mPresenterTransformer != null) {
             bundle.putParcelable(
@@ -132,10 +108,6 @@ public class ViperModule<RepositoryState extends ViperState,
             if (mRepositoryTransformer != null) {
                 mRepository.onRestoreState(mRepositoryTransformer.importState(bundle.getParcelable(
                         ViperUtils.createKey(mKey, ViperUtils.Component.REPOSITORY))));
-            }
-            if (mInteractorTransformer != null) {
-                mInteractor.onRestoreState(mInteractorTransformer.importState(bundle.getParcelable(
-                        ViperUtils.createKey(mKey, ViperUtils.Component.INTERACTOR))));
             }
             if (mPresenterTransformer != null) {
                 mPresenter.onRestoreState(mPresenterTransformer.importState(bundle.getParcelable(

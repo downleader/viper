@@ -10,11 +10,11 @@ import com.exadel.viper.core.state.ViperState;
  * @author  downleader
  */
 public interface ViperRepository<State extends ViperState,
-        Interactor extends ViperInteractor<? extends ViperState>>
+        Presenter extends ViperPresenter<? extends ViperState>>
         extends ViperComponent<State> {
     
-    void registerInteractor(Interactor interactor);
+    void registerPresenter(Presenter presenter);
     
-    void unregisterInteractor(Interactor interactor);
+    void unregisterPresenter(Presenter presenter);
     
 }

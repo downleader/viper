@@ -1,7 +1,6 @@
 package com.exadel.viper.impl.module;
 
 import com.exadel.viper.core.module.ViperModule;
-import com.exadel.viper.impl.component.DefaultInteractor;
 import com.exadel.viper.impl.component.DefaultPresenter;
 import com.exadel.viper.impl.component.DefaultRepository;
 import com.exadel.viper.impl.component.DefaultView;
@@ -15,20 +14,17 @@ import com.exadel.viper.impl.state.DefaultState;
  */
 public class DefaultModule
         <Repository extends DefaultRepository<?>,
-        Interactor extends DefaultInteractor,
-        Presenter extends DefaultPresenter<Interactor>,
+        Presenter extends DefaultPresenter,
         View extends DefaultView>
         
         extends ViperModule
             <DefaultState, Repository,
-            DefaultState, Interactor,
             DefaultState, Presenter,
             DefaultState, View> {
     
     public DefaultModule(Repository repository,
-                         Interactor interactor,
                          Presenter presenter,
                          View view) {
-        super(null, repository, interactor, presenter, view);
+        super(null, repository, presenter, view);
     }
 }

@@ -12,8 +12,6 @@ import com.exadel.viper.R;
 import com.exadel.viper.impl.state.DefaultState;
 import com.exadel.viper.module.goodbye.GoodbyeModule;
 import com.exadel.viper.module.goodbye.entity.GoodbyeMessage;
-import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
-import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractorImpl;
 import com.exadel.viper.module.goodbye.presenter.GoodbyePresenter;
 import com.exadel.viper.module.goodbye.presenter.GoodbyePresenterImpl;
 import com.exadel.viper.module.goodbye.repository.GoodbyeRepository;
@@ -102,11 +100,9 @@ public class GoodbyeActivity extends AppCompatActivity implements GoodbyePresent
     
     private void setupViper() {
         GoodbyeRepository repository = new GoodbyeRepositoryImpl();
-        GoodbyePresenter presenter = new GoodbyePresenterImpl(this);
-        GoodbyeInteractor interactor = new GoodbyeInteractorImpl(repository, presenter);
-        presenter.setInteractor(interactor);
+        GoodbyePresenter presenter = new GoodbyePresenterImpl(repository, this);
         
-        mViperModule = new GoodbyeModule(repository, interactor, presenter, this);
+        mViperModule = new GoodbyeModule(repository, presenter, this);
         mViperModule.bind();
     }
 }

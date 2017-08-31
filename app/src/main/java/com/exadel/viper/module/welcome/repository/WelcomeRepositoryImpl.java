@@ -20,7 +20,7 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
     
     private boolean mBound;
 
-    private WelcomeRepository.Interactor mInteractor;
+    private WelcomeRepository.Presenter mPresenter;
     
     private MessageTask mMessageTask;
     
@@ -64,17 +64,17 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
     }
     
     @Override
-    public void registerInteractor(Interactor interactor) {
-        mInteractor = interactor;
+    public void registerPresenter(WelcomeRepository.Presenter presenter) {
+        mPresenter = presenter;
         if (mPendingMessage != null) {
-            mInteractor.onLoad(mPendingMessage);
+            mPresenter.onLoad(mPendingMessage);
             mPendingMessage = null;
         }
     }
     
     @Override
-    public void unregisterInteractor(Interactor interactor) {
-        mInteractor = null;
+    public void unregisterPresenter(WelcomeRepository.Presenter presenter) {
+        mPresenter = null;
     }
     
     @Override
@@ -115,8 +115,8 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
         protected void onPostExecute(WelcomeMessage message) {
             clearTask();
             if (mBound) {
-                if (mInteractor != null) {
-                    mInteractor.onLoad(message);
+                if (mPresenter != null) {
+                    mPresenter.onLoad(message);
                 }
             } else {
                 mPendingMessage = message;

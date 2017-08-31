@@ -12,7 +12,6 @@ public final class ViperUtils {
     
     public enum Component {
         REPOSITORY,
-        INTERACTOR,
         PRESENTER,
         VIEW,
     }

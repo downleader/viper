@@ -1,9 +1,9 @@
 package com.exadel.viper.module.welcome.repository;
 
-import com.exadel.viper.core.component.ViperInteractor;
+import com.exadel.viper.core.component.ViperPresenter;
 import com.exadel.viper.core.component.ViperRepository;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
-import com.exadel.viper.module.welcome.interactor.WelcomeInteractorState;
+import com.exadel.viper.module.welcome.presenter.WelcomePresenterState;
 
 /**
  * Welcome Repository.
@@ -11,11 +11,11 @@ import com.exadel.viper.module.welcome.interactor.WelcomeInteractorState;
  * @version 1.0 Mar 08 2017
  * @author  downleader
  */
-public interface WelcomeRepository extends ViperRepository<WelcomeRepositoryState, WelcomeRepository.Interactor> {
+public interface WelcomeRepository extends ViperRepository<WelcomeRepositoryState, WelcomeRepository.Presenter> {
     
     void loadMessage();
     
-    interface Interactor extends ViperInteractor<WelcomeInteractorState> {
+    interface Presenter extends ViperPresenter<WelcomePresenterState> {
         
         void onLoad(WelcomeMessage message);
         

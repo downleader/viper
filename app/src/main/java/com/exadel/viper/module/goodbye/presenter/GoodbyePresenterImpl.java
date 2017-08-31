@@ -2,7 +2,7 @@ package com.exadel.viper.module.goodbye.presenter;
 
 import com.exadel.viper.impl.base.DefaultComponent;
 import com.exadel.viper.module.goodbye.entity.GoodbyeMessage;
-import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
+import com.exadel.viper.module.goodbye.repository.GoodbyeRepository;
 
 /**
  * Goodbye Presenter Impl.
@@ -12,41 +12,45 @@ import com.exadel.viper.module.goodbye.interactor.GoodbyeInteractor;
  */
 public class GoodbyePresenterImpl extends DefaultComponent implements GoodbyePresenter {
     
-    private GoodbyeInteractor mInteractor;
+    private GoodbyeRepository mRepository;
     
     private GoodbyePresenter.View mView;
     
-    public GoodbyePresenterImpl(GoodbyePresenter.View view) {
+    public GoodbyePresenterImpl(GoodbyeRepository repository,
+                                GoodbyePresenter.View view) {
+        mRepository = repository;
         mView = view;
     }
     
     @Override
-    public void setInteractor(GoodbyeInteractor interactor) {
-        mInteractor = interactor;
+    public void onBind() {
+        super.onBind();
+        mRepository.registerPresenter(this);
     }
     
     @Override
     public void onUnbind(boolean shutdown) {
         super.onUnbind(shutdown);
+        mRepository.unregisterPresenter(this);
         if (!shutdown) {
+            mRepository = null;
             mView = null;
-            mInteractor = null;
         }
     }
-    
+
     @Override
     public void onUserArrived() {
         mView.displayProgress(true);
-        mInteractor.retrieveMessage();
+        mRepository.loadMessage();
     }
-    
+
     @Override
     public void onNavigate() {
         mView.navigateToMain();
     }
     
     @Override
-    public void onRetrieve(GoodbyeMessage message) {
+    public void onLoad(GoodbyeMessage message) {
         mView.displayProgress(false);
         mView.greetUser(message);
     }

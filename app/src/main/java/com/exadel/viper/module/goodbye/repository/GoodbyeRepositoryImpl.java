@@ -18,7 +18,7 @@ public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRe
     
     private static final String LOGGING_TAG = GoodbyeRepositoryImpl.class.getSimpleName();
 
-    private GoodbyeRepository.Interactor mInteractor;
+    private GoodbyeRepository.Presenter mPresenter;
     
     private MessageTask mMessageTask;
     
@@ -39,17 +39,17 @@ public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRe
     }
     
     @Override
-    public void registerInteractor(GoodbyeRepository.Interactor interactor) {
-        mInteractor = interactor;
+    public void registerPresenter(GoodbyeRepository.Presenter presenter) {
+        mPresenter = presenter;
         if (mPendingMessage != null) {
-            mInteractor.onLoad(mPendingMessage);
+            mPresenter.onLoad(mPendingMessage);
             mPendingMessage = null;
         }
     }
     
     @Override
-    public void unregisterInteractor(GoodbyeRepository.Interactor interactor) {
-        mInteractor = null;
+    public void unregisterPresenter(GoodbyeRepository.Presenter presenter) {
+        mPresenter = null;
     }
     
     @Override
@@ -90,8 +90,8 @@ public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRe
         protected void onPostExecute(GoodbyeMessage message) {
             clearTask();
             if (isBound()) {
-                if (mInteractor != null) {
-                    mInteractor.onLoad(message);
+                if (mPresenter != null) {
+                    mPresenter.onLoad(message);
                 }
             } else {
                 mPendingMessage = message;

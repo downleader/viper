@@ -13,13 +13,10 @@ import com.exadel.viper.R;
 import com.exadel.viper.core.utils.ViperUtils;
 import com.exadel.viper.module.welcome.WelcomeModule;
 import com.exadel.viper.module.welcome.entity.WelcomeMessage;
-import com.exadel.viper.module.welcome.interactor.WelcomeInteractor;
-import com.exadel.viper.module.welcome.interactor.WelcomeInteractorImpl;
 import com.exadel.viper.module.welcome.presenter.WelcomePresenter;
 import com.exadel.viper.module.welcome.presenter.WelcomePresenterImpl;
 import com.exadel.viper.module.welcome.repository.WelcomeRepository;
 import com.exadel.viper.module.welcome.repository.WelcomeRepositoryImpl;
-import com.exadel.viper.module.welcome.transformer.WelcomeInteractorTransformer;
 import com.exadel.viper.module.welcome.transformer.WelcomePresenterTransformer;
 import com.exadel.viper.module.welcome.transformer.WelcomeRepositoryTransformer;
 import com.exadel.viper.module.welcome.transformer.WelcomeViewTransformer;
@@ -124,14 +121,11 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomePresent
     
     private void setupViper(Bundle savedInstanceState) {
         WelcomeRepository repository = new WelcomeRepositoryImpl();
-        WelcomePresenter presenter = new WelcomePresenterImpl(this);
-        WelcomeInteractor interactor = new WelcomeInteractorImpl(repository, presenter);
-        presenter.setInteractor(interactor);
+        WelcomePresenter presenter = new WelcomePresenterImpl(repository, this);
         
-        mViperModule = new WelcomeModule(PERSISTENCE_KEY, repository, interactor, presenter, this);
+        mViperModule = new WelcomeModule(PERSISTENCE_KEY, repository, presenter, this);
         
         mViperModule.registerRepositoryTransformer(new WelcomeRepositoryTransformer());
-        mViperModule.registerInteractorTransformer(new WelcomeInteractorTransformer());
         mViperModule.registerPresenterTransformer(new WelcomePresenterTransformer());
         mViperModule.registerViewTransformer(new WelcomeViewTransformer());
         
