@@ -1,6 +1,6 @@
 package com.exadel.viperdemo.module.goodbye.presenter;
 
-import com.exadel.viper.impl.base.DefaultComponent;
+import com.exadel.viper.impl.base.AbstractPresenter;
 
 import com.exadel.viperdemo.module.goodbye.entity.GoodbyeMessage;
 import com.exadel.viperdemo.module.goodbye.repository.GoodbyeRepository;
@@ -11,16 +11,11 @@ import com.exadel.viperdemo.module.goodbye.repository.GoodbyeRepository;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public class GoodbyePresenterImpl extends DefaultComponent implements GoodbyePresenter {
+public class GoodbyePresenterImpl extends AbstractPresenter<GoodbyeRepository,
+        GoodbyeRepository.Presenter, GoodbyePresenter.View> implements GoodbyePresenter {
     
-    private GoodbyeRepository mRepository;
-    
-    private GoodbyePresenter.View mView;
-    
-    public GoodbyePresenterImpl(GoodbyeRepository repository,
-                                GoodbyePresenter.View view) {
-        mRepository = repository;
-        mView = view;
+    public GoodbyePresenterImpl(GoodbyeRepository repository, GoodbyePresenter.View view) {
+        super(repository, view);
     }
     
     @Override
@@ -31,11 +26,8 @@ public class GoodbyePresenterImpl extends DefaultComponent implements GoodbyePre
     
     @Override
     public void onUnbind(boolean destroy) {
-        super.onUnbind(destroy);
         mRepository.unregisterPresenter(this);
-        
-        mRepository = null;
-        mView = null;
+        super.onUnbind(destroy);
     }
     
     @Override

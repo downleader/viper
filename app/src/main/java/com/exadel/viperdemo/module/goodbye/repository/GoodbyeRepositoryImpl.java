@@ -3,7 +3,7 @@ package com.exadel.viperdemo.module.goodbye.repository;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.exadel.viper.impl.base.DefaultComponent;
+import com.exadel.viper.impl.base.AbstractRepository;
 
 import com.exadel.viperdemo.module.goodbye.entity.GoodbyeMessage;
 
@@ -15,11 +15,9 @@ import java.util.Random;
  * @version 1.0 Aug 30 2017
  * @author  downleader
  */
-public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRepository {
+public class GoodbyeRepositoryImpl extends AbstractRepository<GoodbyeRepository.Presenter> implements GoodbyeRepository {
     
     private static final String LOGGING_TAG = GoodbyeRepositoryImpl.class.getSimpleName();
-    
-    private GoodbyeRepository.Presenter mPresenter;
     
     private MessageTask mMessageTask;
     
@@ -41,16 +39,11 @@ public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRe
     
     @Override
     public void registerPresenter(GoodbyeRepository.Presenter presenter) {
-        mPresenter = presenter;
+        super.registerPresenter(presenter);
         if (mPendingMessage != null) {
             mPresenter.onLoad(mPendingMessage);
             mPendingMessage = null;
         }
-    }
-    
-    @Override
-    public void unregisterPresenter(GoodbyeRepository.Presenter presenter) {
-        mPresenter = null;
     }
     
     @Override

@@ -23,6 +23,16 @@ public abstract class AbstractComponent<State extends ViperState> implements Vip
         mBound = false;
     }
     
+    @Override
+    public State onSaveState() {
+        return null;
+    }
+    
+    @Override
+    public void onRestoreState(State state) {
+        
+    }
+    
     public boolean isBound() {
         return mBound;
     }
