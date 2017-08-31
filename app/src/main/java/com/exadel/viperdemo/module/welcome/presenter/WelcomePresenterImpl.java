@@ -40,9 +40,9 @@ public class WelcomePresenterImpl implements WelcomePresenter {
     }
     
     @Override
-    public void onUnbind(boolean shutdown) {
+    public void onUnbind(boolean destroy) {
         mRepository.unregisterPresenter(this);
-        if (!shutdown) {
+        if (!destroy) {
             mRepository = null;
             mView = null;
         }

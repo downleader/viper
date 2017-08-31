@@ -19,7 +19,7 @@ public abstract class AbstractComponent<State extends ViperState> implements Vip
     }
     
     @Override
-    public void onUnbind(boolean shutdown) {
+    public void onUnbind(boolean destroy) {
         mBound = false;
     }
     

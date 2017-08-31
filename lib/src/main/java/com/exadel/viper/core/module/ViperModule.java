@@ -77,8 +77,8 @@ public class ViperModule<RepositoryState extends ViperState,
     
     public void unbind(boolean destroy) {
         mRepository.onUnbind(destroy);
-        mPresenter.onUnbind(true);
-        mView.onUnbind(true);
+        mPresenter.onUnbind(destroy);
+        mView.onUnbind(destroy);
         
         mRepository = null;
         mPresenter = null;

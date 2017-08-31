@@ -79,7 +79,7 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomePresent
     }
     
     @Override
-    public void onUnbind(boolean shutdown) {
+    public void onUnbind(boolean destroy) {
         mViperModule = null;
     }
     

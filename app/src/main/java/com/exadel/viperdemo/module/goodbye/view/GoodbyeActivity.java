@@ -62,7 +62,7 @@ public class GoodbyeActivity extends AppCompatActivity implements GoodbyePresent
     }
     
     @Override
-    public void onUnbind(boolean shutdown) {
+    public void onUnbind(boolean destroy) {
         mViperModule = null;
     }
     

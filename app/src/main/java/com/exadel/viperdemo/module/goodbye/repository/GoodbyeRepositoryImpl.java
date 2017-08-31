@@ -26,9 +26,9 @@ public class GoodbyeRepositoryImpl extends DefaultComponent implements GoodbyeRe
     private GoodbyeMessage mPendingMessage;
     
     @Override
-    public void onUnbind(boolean shutdown) {
-        super.onUnbind(shutdown);
-        if (shutdown) {
+    public void onUnbind(boolean destroy) {
+        super.onUnbind(destroy);
+        if (destroy) {
             if (mMessageTask != null) {
                 if (!mMessageTask.cancel(true)) {
                     clearTask();

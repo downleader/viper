@@ -30,21 +30,20 @@ public class GoodbyePresenterImpl extends DefaultComponent implements GoodbyePre
     }
     
     @Override
-    public void onUnbind(boolean shutdown) {
-        super.onUnbind(shutdown);
+    public void onUnbind(boolean destroy) {
+        super.onUnbind(destroy);
         mRepository.unregisterPresenter(this);
-        if (!shutdown) {
-            mRepository = null;
-            mView = null;
-        }
+        
+        mRepository = null;
+        mView = null;
     }
-
+    
     @Override
     public void onUserArrived() {
         mView.displayProgress(true);
         mRepository.loadMessage();
     }
-
+    
     @Override
     public void onNavigate() {
         mView.navigateToMain();

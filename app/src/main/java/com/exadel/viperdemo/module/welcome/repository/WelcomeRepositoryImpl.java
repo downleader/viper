@@ -41,9 +41,9 @@ public class WelcomeRepositoryImpl implements WelcomeRepository {
     }
     
     @Override
-    public void onUnbind(boolean shutdown) {
+    public void onUnbind(boolean destroy) {
         mBound = false;
-        if (shutdown) {
+        if (destroy) {
             if (mMessageTask != null) {
                 if (!mMessageTask.cancel(true)) {
                     clearTask();

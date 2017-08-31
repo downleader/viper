@@ -12,7 +12,7 @@ public interface ViperComponent<State extends ViperState> {
     
     void onBind();
     
-    void onUnbind(boolean shutdown);
+    void onUnbind(boolean destroy);
     
     State onSaveState();
     
