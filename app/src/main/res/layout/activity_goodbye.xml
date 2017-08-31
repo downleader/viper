@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.exadel.viper.module.goodbye.view.GoodbyeActivity">
+    tools:context="com.exadel.viperdemo.module.goodbye.view.GoodbyeActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
