@@ -22,7 +22,7 @@ public class WelcomeViewTransformer implements ViperTransformer<WelcomeViewState
     
     @Override
     public WelcomeViewState importState(Parcelable outer) {
-        OuterState outerState = (OuterState) outer;
+        OuterState outerState = OuterState.class.cast(outer);
         return new WelcomeViewState(outerState.getValue());
     }
     
