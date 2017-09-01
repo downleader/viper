@@ -4,7 +4,6 @@ import com.exadel.viper.impl.module.DefaultModule;
 
 import com.exadel.viperdemo.module.goodbye.presenter.GoodbyePresenter;
 import com.exadel.viperdemo.module.goodbye.repository.GoodbyeRepository;
-import com.exadel.viperdemo.module.goodbye.view.GoodbyeActivity;
 
 /**
  * Goodbye Module.
@@ -13,11 +12,11 @@ import com.exadel.viperdemo.module.goodbye.view.GoodbyeActivity;
  * @author  downleader
  */
 public class GoodbyeModule extends DefaultModule<GoodbyeRepository,
-        GoodbyePresenter, GoodbyeActivity> {
+        GoodbyePresenter, GoodbyePresenter.View> {
     
     public GoodbyeModule(GoodbyeRepository repository,
                          GoodbyePresenter presenter,
-                         GoodbyeActivity view) {
+                         GoodbyePresenter.View view) {
         super(repository, presenter, view);
     }
 }
